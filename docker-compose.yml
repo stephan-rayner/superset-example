@@ -1,0 +1,33 @@
+version: "3.2"
+
+services:
+
+    superset:
+        image: tylerfowler/superset
+        environment:
+            ADMIN_USERNAME: stephan
+            ADMIN_FIRST_NAME: Stephan
+            ADMIN_LAST_NAME: Rayner
+            ADMIN_EMAIL: stephan.rayner@gmail.com
+            ADMIN_PWD: cheese
+            SUPERSET_HOME: /superset
+        ports:
+            - 80:8088
+        volumes:
+            - ./data/superset:/superset
+
+    db:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: iugo
+            POSTGRES_PASSWORD: cheese
+            PGDATA: /var/lib/postgresql/data
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
